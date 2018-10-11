@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using GRID.Tyres;
+
+namespace GRID
+{
+    //public abstract
+    class Car
+    {
+        public int Hp { get;private set; } //конски сили
+
+        //public double FuelAmount { get; private set; }
+
+        public Tyre Tyre { get; private set; }
+
+        private double fuelAmount;
+
+        private const int maxCapacity = 160;
+
+        public Car(int hp, double fuelAmount, Tyre tyre)
+        {
+            this.Hp = hp;
+            this.FuelAmount = fuelAmount;
+            this.Tyre = tyre;
+            
+        }
+
+        public double FuelAmount
+        {
+            get
+            {
+                return this.fuelAmount;
+            }
+            private set
+            {
+                if (value < 0)
+                {
+                    throw new InvalidOperationException("Capacity cannot be negative!");
+                }
+
+                this.fuelAmount = value;
+            }
+        }
+
+        public double Refuel(double fuel)
+        {
+            double refuel = this.FuelAmount + fuel;
+            
+            if (this.FuelAmount + fuel < maxCapacity)
+            {
+                refuel = maxCapacity;
+            }
+            else
+            {
+               refuel =  this.FuelAmount + fuel;
+            }
+
+            return refuel;
+
+        }
+
+
+
+    }
+}
